@@ -1,19 +1,11 @@
-'use strict'
+'use strict';
 
 import { Router } from 'express';
-import handler from './handlers/catfactsHandler.js';
+import CatFactsController from './../controllers/catFactsController.js';
 
 const router = Router();
 
-router.get(
-  '/fromSource',
-  async (req, res, next) => {
-    try {
-      // Call handler to response with data
-    } catch (err) {
-      next(err);
-    }
-  }
-)
+router.get('/', CatFactsController.findAll);
+router.get('/fromSource', CatFactsController.fetchListFromAPI);
 
 export default router;
