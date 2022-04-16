@@ -23,7 +23,8 @@ class CatFactsController {
   }
 
   static async update(req, res, next) {
-    const { id, text, source, type, verified } = req.body;
+    const { text, source, type, verified } = req.body;
+    const { id } = req.params;
     try {
       const result = await CatFact.update([id, text, source, type, verified]);
       if (!result) throw { name: 'NotFound' };
@@ -70,11 +71,9 @@ class CatFactsController {
         return createPromise.status === 'fulfilled';
       });
       if (!fulfilledPromises.length) throw { name: 'FailedToFetchAllFacts' };
-      res
-        .status(200)
-        .json({
-          message: `success to fetch ${fulfilledPromises.length} out of ${createPromises.length} facts`
-        });
+      res.status(200).json({
+        message: `success to fetch ${fulfilledPromises.length} out of ${createPromises.length} facts`
+      });
     } catch (error) {
       next(error);
     }
