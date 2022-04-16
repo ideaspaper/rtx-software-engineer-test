@@ -27,3 +27,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Deployed client
+
+You can find the deployed client on https://rtx-cat-facts.web.app.

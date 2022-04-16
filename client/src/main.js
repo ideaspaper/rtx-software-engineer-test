@@ -10,5 +10,6 @@ const app = createApp(App);
 
 app.use(router);
 app.use(ElementPlus);
+app.provide('baseUrl', 'http://localhost:3000');
 
 app.mount('#app');
