@@ -55,7 +55,7 @@ class CatFact {
   }
 
   /**
-   * Find a cat fact record in database by its id.
+   * Find a cat fact record stored in database by its id.
    *
    * @param {String} id
    * @returns
