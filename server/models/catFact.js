@@ -1,6 +1,19 @@
 import pool from './../database/connection.js';
 
 class CatFact {
+  /**
+   * Construct a CatFact object.
+   *
+   * @param {String} id
+   * @param {String} user
+   * @param {String} text
+   * @param {String} source
+   * @param {Date} updatedAt
+   * @param {String} type
+   * @param {Date} createdAt
+   * @param {Boolean} verified
+   * @returns {CatFact}
+   */
   constructor(id, user, text, source, updatedAt, type, createdAt, verified) {
     this.id = id;
     this.user = user;
@@ -12,6 +25,11 @@ class CatFact {
     this.verified = verified;
   }
 
+  /**
+   * Find a cat fact record stored in database by its id.
+   *
+   * @returns
+   */
   static async findAll() {
     try {
       const query = {
@@ -36,6 +54,12 @@ class CatFact {
     }
   }
 
+  /**
+   * Find a cat fact record in database by its id.
+   *
+   * @param {String} id
+   * @returns
+   */
   static async findById(id) {
     try {
       const query = {
@@ -61,6 +85,22 @@ class CatFact {
     }
   }
 
+  /**
+   * Insert a new cat fact to the database. This function accepts an array as argument.
+   *
+   * The order of items in the array should be:
+   *
+   * 1. `_id`
+   * 1. `user`
+   * 1. `text`
+   * 1. `source`
+   * 1. `updatedAt`
+   * 1. `type`
+   * 1. `createdAt`
+   * 1. `status.verified`
+   *
+   * @param {String[]} catFact
+   */
   static async create(catFact) {
     try {
       const query = {
@@ -84,8 +124,23 @@ class CatFact {
     }
   }
 
+  /**
+   * Update a cat fact record stored in database by its id. This function accepts an array as argument.
+   *
+   * The order of items in the array should be:
+   *
+   * 1. `id`
+   * 1. `text`
+   * 1. `source`
+   * 1. `type`
+   * 1. `verified`
+   *
+   * @param {String[]} updateCatFact
+   * @returns
+   */
   static async update(updateCatFact) {
     try {
+      // Insert updated date to the argument
       updateCatFact.push(new Date());
       const query = {
         name: 'update-cat-fact',
@@ -108,6 +163,12 @@ class CatFact {
     }
   }
 
+  /**
+   * Delete a cat fact record stored in database by its id.
+   *
+   * @param {String} id
+   * @returns
+   */
   static async destroy(id) {
     try {
       const query = {

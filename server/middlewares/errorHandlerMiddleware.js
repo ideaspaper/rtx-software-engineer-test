@@ -1,3 +1,11 @@
+/**
+ * Custom error handler middleware.
+ *
+ * @param {*} error
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 function errorHandlerMiddleware(error, req, res, next) {
   let status;
   let message;

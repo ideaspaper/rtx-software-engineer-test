@@ -140,7 +140,8 @@ describe('PUT /catfacts/:id', () => {
       type: 'source8type',
       verified: false
     };
-    const { body } = await supertest(app).put(`/catfacts/${8}`)
+    const { body } = await supertest(app)
+      .put(`/catfacts/${8}`)
       .set('Content-Type', 'application/json')
       .send(updateCatFact8)
       .expect(200);
@@ -163,7 +164,8 @@ describe('PUT /catfacts/:id', () => {
       type: 'source99type',
       verified: false
     };
-    const { body } = await supertest(app).put(`/catfacts/${99}`)
+    const { body } = await supertest(app)
+      .put(`/catfacts/${99}`)
       .set('Content-Type', 'application/json')
       .send(updateCatFact99)
       .expect(404);
