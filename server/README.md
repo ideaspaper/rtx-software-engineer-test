@@ -67,7 +67,7 @@
 
 ## Getting Started using Deployed Server
 
-Instead or running this server locally, you can find the deployed server on https://rtx-cat-facts.herokuapp.com/.
+Instead or running this server locally, you can find the deployed server on https://rtx-cat-facts.herokuapp.com.
 
 ## Reference
 
