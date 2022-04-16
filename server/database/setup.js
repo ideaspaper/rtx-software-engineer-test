@@ -13,8 +13,7 @@ const query = {
       "type"      VARCHAR,
       "createdAt" TIMESTAMP,
       "verified"  BOOLEAN
-    );
-  `
+    );`
 };
 
 pool.query(query, (error) => {

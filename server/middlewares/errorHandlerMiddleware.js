@@ -2,12 +2,15 @@ function errorHandlerMiddleware(error, req, res, next) {
   let status;
   let message;
 
-  if (error.name === 'FailedToFetchFromAPI') {
+  if (error.name === 'NotFound') {
+    status = 404;
+    message = 'not found';
+  } else if (error.name === 'FailedToFetchFromAPI') {
     status = 500;
     message = 'failed to fetch from api';
-  } else if (error.name === 'FailedToFetchSomeFacts') {
+  } else if (error.name === 'FailedToFetchAllFacts') {
     status = 500;
-    message = 'failed to fetch some facts';
+    message = `failed to fetch all facts`;
   } else {
     status = 500;
     message = 'internal server error';
