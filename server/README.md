@@ -2,7 +2,7 @@
 
 ## Getting Started Locally
 
-1. This server requires Node.js (16.x.x) and PostgreSQL to be installedin your local machine. See links below for more information.
+1. This server requires Node.js (16.x.x) and PostgreSQL to be installed in your local machine. See links below for more information.
 
    - [PostgreSQL](https://www.postgresql.org/download/)
    - [Node.js](https://nodejs.org/en/)
@@ -71,4 +71,4 @@ Instead or running this server locally, you can find the deployed server on http
 
 ## Reference
 
-REST API documentation can be found [here](https://documenter.getpostman.com/view/19160763/Uyr5neGu).
+REST API documentation can be found on https://documenter.getpostman.com/view/19160763/Uyr5neGu.
