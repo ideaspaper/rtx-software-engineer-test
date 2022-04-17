@@ -27,8 +27,9 @@
 import {
   ref, computed, onMounted, inject,
 } from 'vue';
-import { ElMessage } from 'element-plus';
 import axios from 'axios';
+import { ElMessage } from 'element-plus';
+import errorHandler from '../use/errorHandler';
 import CatFactsTable from '../components/CatFactsTable.vue';
 import FactForm from '../components/FactForm.vue';
 
@@ -54,13 +55,7 @@ export default {
         });
         facts.value = data;
       } catch (error) {
-        if (error.response) {
-          const { statusText, data } = error.response;
-          if (data.message) ElMessage.error(`${data.message}`);
-          else ElMessage.error(`${statusText}`);
-        } else {
-          ElMessage.error(error.message);
-        }
+        errorHandler(error);
       }
       loadingFacts.value = false;
     };
@@ -76,13 +71,7 @@ export default {
         formData.value = { ...formData.value, ...data };
       } catch (error) {
         formData.value.displayFactForm = false;
-        if (error.response) {
-          const { statusText, data } = error.response;
-          if (data.message) ElMessage.error(`${data.message}`);
-          else ElMessage.error(`${statusText}`);
-        } else {
-          ElMessage.error(error.message);
-        }
+        errorHandler(error);
         getFacts();
       }
       loadingFact.value = false;
@@ -99,13 +88,7 @@ export default {
         });
         ElMessage.success(data);
       } catch (error) {
-        if (error.response) {
-          const { statusText, data } = error.response;
-          if (data.message) ElMessage.error(`${data.message}`);
-          else ElMessage.error(`${statusText}`);
-        } else {
-          ElMessage.error(error.message);
-        }
+        errorHandler(error);
       }
       loadingSubmitFact.value = false;
       formData.value.displayFactForm = false;
@@ -120,13 +103,7 @@ export default {
         });
         ElMessage.success(data.message);
       } catch (error) {
-        if (error.response) {
-          const { statusText, data } = error.response;
-          if (data.message) ElMessage.error(`${data.message}`);
-          else ElMessage.error(`${statusText}`);
-        } else {
-          ElMessage.error(error.message);
-        }
+        errorHandler(error);
       }
       getFacts();
     };
@@ -140,13 +117,7 @@ export default {
         });
         ElMessage.success(data);
       } catch (error) {
-        if (error.response) {
-          const { statusText, data } = error.response;
-          if (data.message) ElMessage.error(`${data.message}`);
-          else ElMessage.error(`${statusText}`);
-        } else {
-          ElMessage.error(error.message);
-        }
+        errorHandler(error);
       }
       loadingFetchApi.value = false;
       getFacts();
