@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      v-model="dialogFormVisible"
+      v-model="form.display"
       title="Cat Fact"
       :before-close="handleClickCancel"
     >
@@ -9,7 +9,7 @@
         v-model="form"
         label-width="60px"
         :label-position="'left'"
-        v-loading="loadingFact"
+        v-loading="form.loading"
       >
         <el-form-item label="Fact">
           <el-input
@@ -46,7 +46,7 @@
           <el-button @click="handleClickCancel">Cancel</el-button>
           <el-button
             type="primary" @click="handleClickSubmit"
-            :loading="loadingSubmitFact"
+            :loading="form.loadingSubmit"
           >Submit</el-button>
         </span>
       </template>
@@ -59,15 +59,10 @@ import { ref, onUpdated } from 'vue';
 
 export default {
   name: 'fact-form',
-  props: ['modelValue', 'fact', 'loadingFact', 'loadingSubmitFact'],
+  props: ['modelValue'],
   setup(props, context) {
-    const dialogFormVisible = ref(false);
     const form = ref({
-      id: null,
-      text: null,
-      source: null,
-      type: null,
-      verified: null,
+      display: false,
     });
 
     const handleInputChange = (field, value) => {
@@ -75,7 +70,7 @@ export default {
     };
 
     const handleClickCancel = () => {
-      context.emit('update:modelValue', { ...props.modelValue, displayFactForm: false });
+      context.emit('update:modelValue', { ...props.modelValue, display: false });
     };
 
     const handleClickSubmit = () => {
@@ -83,17 +78,11 @@ export default {
     };
 
     onUpdated(() => {
-      dialogFormVisible.value = props.modelValue.displayFactForm;
-      form.value.id = props.modelValue.id;
-      form.value.text = props.modelValue.text;
-      form.value.source = props.modelValue.source;
-      form.value.type = props.modelValue.type;
-      form.value.verified = props.modelValue.verified;
+      form.value = props.modelValue;
     });
 
     return {
       form,
-      dialogFormVisible,
       handleClickCancel,
       handleClickSubmit,
       handleInputChange,

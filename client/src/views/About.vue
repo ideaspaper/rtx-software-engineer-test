@@ -10,8 +10,6 @@
     >Fetch from API</el-button>
     <FactForm
       v-model="formData"
-      :loadingFact="loadingFact"
-      :loadingSubmitFact="loadingSubmitFact"
       @submitEdit="handleSubmitEdit"
     />
     <CatFactsTable
@@ -37,14 +35,14 @@ export default {
   name: 'facts',
   setup() {
     const formData = ref({
-      displayFactForm: false,
+      display: false,
+      loading: false,
+      loadingSubmit: false,
     });
     const baseUrl = inject('baseUrl');
     const facts = ref([]);
     const loadingFacts = ref(true);
     const loadingFetchApi = ref(false);
-    const loadingFact = ref(true);
-    const loadingSubmitFact = ref(false);
 
     const getFacts = async () => {
       loadingFacts.value = true;
@@ -61,8 +59,8 @@ export default {
     };
 
     const handleClickEdit = async (id) => {
-      formData.value.displayFactForm = true;
-      loadingFact.value = true;
+      formData.value.display = true;
+      formData.value.loading = true;
       try {
         const { data } = await axios({
           url: `${baseUrl}/catfacts/${id}`,
@@ -70,15 +68,15 @@ export default {
         });
         formData.value = { ...formData.value, ...data };
       } catch (error) {
-        formData.value.displayFactForm = false;
+        formData.value.display = false;
         errorHandler(error);
         getFacts();
       }
-      loadingFact.value = false;
+      formData.value.loading = false;
     };
 
     const handleSubmitEdit = async () => {
-      loadingSubmitFact.value = true;
+      formData.value.loadingSubmit = true;
       try {
         const { data } = await axios({
           url: `${baseUrl}/catfacts/${formData.value.id}`,
@@ -90,8 +88,8 @@ export default {
       } catch (error) {
         errorHandler(error);
       }
-      loadingSubmitFact.value = false;
-      formData.value.displayFactForm = false;
+      formData.value.loadingSubmit = false;
+      formData.value.display = false;
       getFacts();
     };
 
@@ -140,8 +138,6 @@ export default {
       formattedFacts,
       loadingFetchApi,
       formData,
-      loadingFact,
-      loadingSubmitFact,
       handleClickEdit,
       handleClickDelete,
       handleClickFetchApi,
